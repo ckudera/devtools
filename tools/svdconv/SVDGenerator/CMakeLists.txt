@@ -20,7 +20,7 @@ add_library(SVDGenerator STATIC ${SOURCE_FILES} ${HEADER_FILES})
 set_property(TARGET SVDGenerator PROPERTY
   MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
-target_include_directories(SVDGenerator PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+target_include_directories(SVDGenerator PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/external/json/include
                                         PRIVATE ../SVDConv/include)
 
 target_link_libraries(SVDGenerator PUBLIC ErrLog SVDModel RteFsUtils RteUtils fmt)

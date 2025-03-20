@@ -671,6 +671,12 @@ bool SvdUtils::ConvertBitRange(const string &text, uint32_t &msb, uint32_t &lsb)
     return false;
   }
 
+  if(msb < lsb) {
+    uint32_t tmp = msb;
+    msb = lsb;
+    lsb = tmp;
+  }
+
   return true;
 }
 

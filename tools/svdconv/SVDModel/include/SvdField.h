@@ -73,6 +73,7 @@ public:
   uint32_t   GetMsb() { return m_msb;                  }
   bool  SetLsb(uint32_t lsb) { m_lsb = lsb; return true; }
   bool  SetMsb(uint32_t msb) { m_msb = msb; return true; }
+  bool  HasWriteConstraint() { return m_writeConstraint != nullptr; }
 
 protected:
 

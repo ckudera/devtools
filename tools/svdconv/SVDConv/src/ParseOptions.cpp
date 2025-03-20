@@ -208,6 +208,20 @@ bool ParseOptions::SetQuiet()
   return true;
 }
 
+bool ParseOptions::SetDebugOutputText()
+{
+  m_options.SetDebugOutputModeText();
+
+  return true;
+}
+
+bool ParseOptions::SetDebugOutputJson()
+{
+  m_options.SetDebugOutputModeJson();
+
+  return true;
+}
+
 bool ParseOptions::SetNoCleanup()
 {
   m_options.SetNoCleanup();
@@ -421,6 +435,8 @@ ParseOptions::Result ParseOptions::ParseOpts(int argc, const char* argv[])
       ( "under-test"            , "Use when running in cloud environment"                     , cxxopts::value<bool>()->default_value("false") )
       ( "nocleanup"             , "Do not delete intermediate files"                          , cxxopts::value<bool>()->default_value("false") )
       ( "quiet"                 , "No output on console"                                      , cxxopts::value<bool>()->default_value("false") )
+      ( "debug-output-text"     , "Add debug output in text format"                           , cxxopts::value<bool>()->default_value("false") )
+      ( "debug-output-json"     , "Add debug output in json format"                           , cxxopts::value<bool>()->default_value("false") )
       ( "debug"                 , "Add information to generated files: struct/header/sfd/break" , cxxopts::value<std::vector<std::string>>() )
       ( "n"                     , "SFD Output file name"                                      , cxxopts::value<string>() )
       ( "V,version"               , "Show program version")
@@ -441,6 +457,16 @@ ParseOptions::Result ParseOptions::ParseOpts(int argc, const char* argv[])
 
     if(parseResult.count("quiet")) {
       if(!SetQuiet()) {
+        bOk = false;
+      }
+    }
+    if(parseResult.count("debug-output-text")) {
+      if(!SetDebugOutputText()) {
+        bOk = false;
+      }
+    }
+    if(parseResult.count("debug-output-json")) {
+      if(!SetDebugOutputJson()) {
         bOk = false;
       }
     }

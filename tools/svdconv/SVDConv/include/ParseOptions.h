@@ -43,6 +43,8 @@ protected:
   bool ConfigureProgramName(std::string programPath);
   bool CreateArgumentString(int argc, const char* argv[]);
   bool SetQuiet();
+  bool SetDebugOutputText();
+  bool SetDebugOutputJson();
   bool SetNoCleanup();
   bool SetUnderTest();
   bool SetAllowSuppressError();

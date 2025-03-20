@@ -1380,7 +1380,7 @@ bool SvdPeripheral::CheckAddressBlocks()
     CheckAddressBlockAddrSpace(addrBlock);
   }
 
-  MergeAddressBlocks();
+  // MergeAddressBlocks();
 
   return true;
 }
