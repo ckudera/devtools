@@ -40,8 +40,8 @@ public:
   const std::string&                  GetAlternate            ()                                                    { return m_alternate;           }
   const std::string&                  GetHeaderStructName     ()                                                    { return m_headerStructName;    }
   uint64_t                            GetOffset               ()                                                    { return m_offset;              }
-  uint64_t                            GetResetValue           ()                                                    { return m_resetValue;          }
-  uint64_t                            GetResetMask            ()                                                    { return m_resetMask;           }
+  std::optional<uint64_t>             GetResetValue           ()                                                    { return m_resetValue;          }
+  std::optional<uint64_t>             GetResetMask            ()                                                    { return m_resetMask;           }
   SvdTypes::Access                    GetAccess               ()                                                    { return m_access;              }
   SvdTypes::ModifiedWriteValue        GetModifiedWriteValues  ()                                                    { return m_modifiedWriteValues; }
   SvdTypes::ReadAction                GetReadAction           ()                                                    { return m_readAction;          }
@@ -49,8 +49,8 @@ public:
   bool                                SetAlternate            (const std::string             &alternate         )   { m_alternate           = alternate          ; return true; }
   bool                                SetHeaderStructName     (const std::string             &headerStructName  )   { m_headerStructName    = headerStructName   ; return true; }
   bool                                SetOffset               (uint64_t                         offset          )   { m_offset              = offset             ; return true; }
-  bool                                SetResetValue           (uint64_t                         resetValue      )   { m_resetValue          = resetValue         ; return true; }
-  bool                                SetResetMask            (uint64_t                         resetMask       )   { m_resetMask           = resetMask          ; return true; }
+  bool                                SetResetValue           (std::optional<uint64_t>      resetValue          )   { m_resetValue          = resetValue         ; return true; }
+  bool                                SetResetMask            (std::optional<uint64_t>      resetMask           )   { m_resetMask           = resetMask          ; return true; }
   bool                                SetAccess               (SvdTypes::Access             access              )   { m_access              = access             ; return true; }
   bool                                SetModifiedWriteValues  (SvdTypes::ModifiedWriteValue modifiedWriteValues )   { m_modifiedWriteValues = modifiedWriteValues; return true; }
   bool                                SetReadAction           (SvdTypes::ReadAction         readAction          )   { m_readAction          = readAction         ; return true; }
@@ -64,8 +64,8 @@ private:
   SvdEnumContainer               *m_enumContainer;
   uint32_t                        m_calcSize;
   uint64_t                        m_offset;
-  uint64_t                        m_resetValue;
-  uint64_t                        m_resetMask;
+  std::optional<uint64_t>         m_resetValue;
+  std::optional<uint64_t>         m_resetMask;
   SvdTypes::Access                m_access;
   SvdTypes::ModifiedWriteValue    m_modifiedWriteValues;
   SvdTypes::ReadAction            m_readAction;

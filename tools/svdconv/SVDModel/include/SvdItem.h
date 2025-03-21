@@ -13,6 +13,7 @@
 #include <string>
 #include <list>
 #include <map>
+#include <optional>
 
 
 // Configuration
@@ -151,8 +152,8 @@ public:
   virtual uint64_t                      GetAddress                        ()                      { return 0; }
   virtual const std::string&            GetAlternateGroup                 ()                      { return SvdUtils::EMPTY_STRING;  }
   virtual uint32_t                      GetSize                           ()                      { return GetEffectiveBitWidth() / 8;  }
-  virtual uint64_t                      GetResetValue                     ()                      { return 0;  }
-  virtual uint64_t                      GetResetMask                      ()                      { return 0;  }
+  virtual std::optional<uint64_t>       GetResetValue                     ()                      { return std::nullopt;  }
+  virtual std::optional<uint64_t>       GetResetMask                      ()                      { return std::nullopt;  }
   virtual SvdTypes::Access              GetAccess                         ()                      { return SvdTypes::Access::UNDEF;     }
   virtual SvdTypes::ModifiedWriteValue  GetModifiedWriteValue             ()                      { return SvdTypes::ModifiedWriteValue::UNDEF;   }
   virtual SvdTypes::ReadAction          GetReadAction                     ()                      { return SvdTypes::ReadAction::UNDEF; }

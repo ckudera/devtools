@@ -62,8 +62,8 @@ public:
   const std::string&            GetAlternate            () { return m_alternate;            }
   const std::string&            GetDataType             () { return m_dataType;             }
   uint64_t                      GetOffset               () { return m_offset;               }
-  uint64_t                      GetResetValue           () { return m_resetValue;           }
-  uint64_t                      GetResetMask            () { return m_resetMask;            }
+  std::optional<uint64_t>       GetResetValue           () { return m_resetValue;           }
+  std::optional<uint64_t>       GetResetMask            () { return m_resetMask;            }
   SvdTypes::Access              GetAccess               () { return m_access;               }
   SvdTypes::ModifiedWriteValue  GetModifiedWriteValue   () { return m_modifiedWriteValues;  }
   SvdTypes::ReadAction          GetReadAction           () { return m_readAction;           }
@@ -75,8 +75,8 @@ public:
   bool                          SetAlternateGroup       (const std::string& alternateGroup              ) { m_alternateGroup      = alternateGroup;     return true; }
   bool                          SetDataType             (const std::string& dataType                    ) { m_dataType            = dataType;           return true; }
   bool                          SetOffset               (uint64_t offset                                ) { m_offset              = offset;             return true; }
-  bool                          SetResetValue           (uint64_t val                                   ) { m_resetValue          = val;                return true; }
-  bool                          SetResetMask            (uint64_t val                                   ) { m_resetMask           = val;                return true; }
+  bool                          SetResetValue           (std::optional<uint64_t> val                                   ) { m_resetValue          = val;                return true; }
+  bool                          SetResetMask            (std::optional<uint64_t> val                                   ) { m_resetMask           = val;                return true; }
   bool                          SetAccess               (SvdTypes::Access             access            ) { m_access              = access;             return true; }
   bool                          SetModifiedWriteValues  (SvdTypes::ModifiedWriteValue modifiedWriteValue) { m_modifiedWriteValues = modifiedWriteValue; return true; }
   bool                          SetReadAction           (SvdTypes::ReadAction         readAction        ) { m_readAction          = readAction;         return true; }
@@ -98,8 +98,8 @@ private:
   bool                          m_hasValidFields;
   bool                          m_accessMaskValid;
   uint64_t                      m_offset;
-  uint64_t                      m_resetValue;
-  uint64_t                      m_resetMask;
+  std::optional<uint64_t>       m_resetValue;
+  std::optional<uint64_t>       m_resetMask;
   uint64_t                      m_accessMaskRead;
   uint64_t                      m_accessMaskWrite;
   SvdTypes::Access              m_access;

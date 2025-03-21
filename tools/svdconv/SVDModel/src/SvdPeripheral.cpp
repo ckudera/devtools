@@ -190,15 +190,23 @@ bool SvdPeripheral::ProcessXmlElement(XMLTreeElement* xmlElement)
     return true;
   }
   else if(tag == "resetValue") {
-    if(!SvdUtils::ConvertNumber(value, m_resetValue)) {
+    uint64_t tmp;
+
+    if(!SvdUtils::ConvertNumber(value, tmp)) {
       SvdUtils::CheckParseError(tag, value, xmlElement->GetLineNumber());
     }
+    
+    m_resetValue = tmp;
     return true;
   }
   else if(tag == "resetMask") {
-    if(!SvdUtils::ConvertNumber(value, m_resetMask)) {
+    uint64_t tmp;
+
+    if(!SvdUtils::ConvertNumber(value, tmp)) {
       SvdUtils::CheckParseError(tag, value, xmlElement->GetLineNumber());
     }
+
+    m_resetMask = tmp;
     return true;
   }
   else if(tag == "addressBlock") {
@@ -371,8 +379,8 @@ bool SvdPeripheral::CopyItem(SvdItem *from)
   if(appendToName     == "")                      { SetAppendToName        (pFrom->GetAppendToName        ()); }
   if(disableCondition == nullptr)                 { CopyDisableCondition    (pFrom->GetDisableCondition    ()); }  // TODO: Add a copy mechanism?
   if(address          == 0 )                      { SetAddress             (pFrom->GetAddress             ()); }
-  if(resetValue       == 0 )                      { SetResetValue          (pFrom->GetResetValue          ()); }
-  if(resetMask        == 0 )                      { SetResetMask           (pFrom->GetResetMask           ()); }
+  if(!resetValue.has_value())                     { SetResetValue          (pFrom->GetResetValue          ()); }
+  if(!resetMask.has_value())                      { SetResetMask           (pFrom->GetResetMask           ()); }
   if(access           == SvdTypes::Access::UNDEF) { SetAccess              (pFrom->GetAccess              ()); }
 
   CopyAddressBlocks(pFrom);

@@ -9,6 +9,7 @@
 #include "SvdTypes.h"
 #include "SvdCExpression.h"
 
+#include <optional>
 
 
 class SvdPeripheral;
@@ -98,8 +99,8 @@ public:
   const std::string&      GetHeaderStructName         () { return m_headerStructName; }
   SvdCExpression*         GetDisableCondition         () { return m_disableCondition; }
   uint64_t                GetAddress                  () { return m_address.u64;      }
-  uint64_t                GetResetValue               () { return m_resetValue;       }
-  uint64_t                GetResetMask                () { return m_resetMask;        }
+  std::optional<uint64_t> GetResetValue               () { return m_resetValue;       }
+  std::optional<uint64_t> GetResetMask                () { return m_resetMask;        }
   SvdTypes::Access        GetAccess                   () { return m_access;           }
   bool                    GetAddressValid             () { return m_address.bValid;   }
   bool                    GetHasAnnonUnions           () { return m_hasAnnonUnions;   }
@@ -113,8 +114,8 @@ public:
   bool                    SetPrependToName            ( const std::string&  prependToName   )  { m_prependToName    = prependToName   ;  return true; }
   bool                    SetAppendToName             ( const std::string&  appendToName    )  { m_appendToName     = appendToName    ;  return true; }
   bool                    SetAddress                  ( uint64_t            address         )  { m_address.u64      = address         ;  m_address.bValid = true; return true; }
-  bool                    SetResetValue               ( uint64_t            resetValue      )  { m_resetValue       = resetValue      ;  return true; }
-  bool                    SetResetMask                ( uint64_t            resetMask       )  { m_resetMask        = resetMask       ;  return true; }
+  bool                    SetResetValue               ( std::optional<uint64_t> resetValue  )  { m_resetValue       = resetValue      ;  return true; }
+  bool                    SetResetMask                ( std::optional<uint64_t> resetMask   )  { m_resetMask        = resetMask       ;  return true; }
   bool                    SetAccess                   ( SvdTypes::Access    access          )  { m_access           = access          ;  return true; }
 
 protected:
@@ -124,8 +125,8 @@ private:
   SvdCExpression*             m_disableCondition;
   bool                        m_hasAnnonUnions;
   uint32_t                    m_calcSize;
-  uint64_t                    m_resetValue;
-  uint64_t                    m_resetMask;
+  std::optional<uint64_t>     m_resetValue;
+  std::optional<uint64_t>     m_resetMask;
   SvdTypes::Access            m_access;
   Value                       m_address;
   std::list<SvdAddressBlock*> m_addressBlock;

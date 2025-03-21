@@ -1084,8 +1084,8 @@ uint64_t SvdItem::GetEffectiveResetValue()
 {
   for(auto parent=this; parent; parent=parent->GetParent()) {
     const auto val = parent->GetResetValue();
-    if(val != 0) {
-      return val;
+    if (val.has_value()) {
+      return val.value();
     }
   }
 
@@ -1096,8 +1096,8 @@ uint64_t SvdItem::GetEffectiveResetMask()
 {
   for(auto parent=this; parent; parent=parent->GetParent()) {
     const auto val = parent->GetResetMask();
-    if(val != 0) {
-      return val;
+    if (val.has_value()) {
+      return val.value();
     }
   }
 

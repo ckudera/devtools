@@ -75,8 +75,8 @@ public:
   const std::string&  GetHeaderSystemFilename           () { return m_headerSystemFilename   ; }
   uint32_t            GetAddressUnitBits                () { return m_addressUnitBits        ; }
   uint32_t            GetWidth                          () { return m_width                  ; }
-  uint64_t            GetResetValue                     () { return m_resetValue             ; }
-  uint64_t            GetResetMask                      () { return m_resetMask              ; }
+  std::optional<uint64_t> GetResetValue                 () { return m_resetValue             ; }
+  std::optional<uint64_t> GetResetMask                  () { return m_resetMask              ; }
   SvdTypes::Access    GetAccess                         () { return m_access                 ; }
 
   bool                SetSchemaVersion                  (const std::string& schemaVersion) { m_schemaVersion = schemaVersion; return true; }
@@ -94,8 +94,8 @@ private:
   bool                              m_hasAnnonUnions;
   uint32_t                          m_addressUnitBits;
   uint32_t                          m_width;
-  uint64_t                          m_resetValue;
-  uint64_t                          m_resetMask;
+  std::optional<uint64_t>           m_resetValue;
+  std::optional<uint64_t>           m_resetMask;
   SvdTypes::Access                  m_access;
 
   std::string                       m_schemaVersion;

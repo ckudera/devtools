@@ -126,15 +126,23 @@ bool SvdRegister::ProcessXmlElement(XMLTreeElement* xmlElement)
     return true;
   }
   else if(tag == "resetValue") {
-    if(!SvdUtils::ConvertNumber(value, m_resetValue)) {
+    uint64_t tmp;
+
+    if(!SvdUtils::ConvertNumber(value, tmp)) {
       SvdUtils::CheckParseError(tag, value, xmlElement->GetLineNumber());
     }
+
+    m_resetValue = tmp;
     return true;
   }
   else if(tag == "resetMask") {
-    if(!SvdUtils::ConvertNumber(value, m_resetMask)) {
+    uint64_t tmp;
+
+    if(!SvdUtils::ConvertNumber(value, tmp)) {
       SvdUtils::CheckParseError(tag, value, xmlElement->GetLineNumber());
     }
+    
+    m_resetMask = tmp;
     return true;
   }
   else if(tag == "modifiedWriteValues") {
@@ -320,8 +328,8 @@ bool SvdRegister::CopyItem(SvdItem *from)
   if(dataType            == "")                                   { SetDataType            (pFrom->GetDataType           ()); }
   if(offset              == SvdItem::VALUE64_NOT_INIT)            { SetOffset              (pFrom->GetOffset             ()); }
   if(width               == 0 )                                   { SetBitWidth            (pFrom->GetBitWidth           ()); }
-  if(resetValue          == 0 )                                   { SetResetValue          (pFrom->GetResetValue         ()); }
-  if(resetMask           == 0 )                                   { SetResetMask           (pFrom->GetResetMask          ()); }
+  if(!resetValue.has_value()  )                                   { SetResetValue          (pFrom->GetResetValue         ()); }
+  if(!resetMask.has_value()   )                                   { SetResetMask           (pFrom->GetResetMask          ()); }
   if(access              == SvdTypes::Access::UNDEF)              { SetAccess              (pFrom->GetAccess             ()); }
   if(modifiedWriteValues == SvdTypes::ModifiedWriteValue::UNDEF)  { SetModifiedWriteValues (pFrom->GetModifiedWriteValue ()); }
   if(readAction          == SvdTypes::ReadAction::UNDEF)          { SetReadAction          (pFrom->GetReadAction         ()); }
@@ -702,12 +710,12 @@ bool SvdRegister::CheckItem()
   }
   maxRegValue -= 1;
 
-  if(resetValue > maxRegValue) {
-    LogMsg("M382", LEVEL("Register"), NAME(name), NAME2("Reset Value"), HEXNUM(resetValue), NUM(regWidth), lineNo);
+  if (resetValue.has_value() && resetValue.value() > maxRegValue) {
+    LogMsg("M382", LEVEL("Register"), NAME(name), NAME2("Reset Value"), HEXNUM(resetValue.value()), NUM(regWidth), lineNo);
     SetResetValue(0);
   }
-  if(resetMask > maxRegValue) {
-    LogMsg("M382", LEVEL("Register"), NAME(name), NAME2("Reset Mask"), HEXNUM(resetMask), NUM(regWidth), lineNo);
+  if (resetMask.has_value() && resetMask.value() > maxRegValue) {
+    LogMsg("M382", LEVEL("Register"), NAME(name), NAME2("Reset Mask"), HEXNUM(resetMask.value()), NUM(regWidth), lineNo);
     SetResetMask(0);
   }
 
