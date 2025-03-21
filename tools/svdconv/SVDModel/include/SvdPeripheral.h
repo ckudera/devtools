@@ -105,8 +105,9 @@ public:
   bool                    GetAddressValid             () { return m_address.bValid;   }
   bool                    GetHasAnnonUnions           () { return m_hasAnnonUnions;   }
   SvdEnumContainer*       GetEnumContainer            () { return m_enumContainer;    }
-  bool                    SetHasAnnonUnions           () { m_hasAnnonUnions   = true            ;  return true; }
+  const std::list<SvdAddressBlock*>& GetAddressBlocks() const { return m_addressBlock; }
 
+  bool                    SetHasAnnonUnions           () { m_hasAnnonUnions   = true            ;  return true; }
   bool                    SetVersion                  ( const std::string&  version         )  { m_version          = version         ;  return true; }
   bool                    SetGroupName                ( const std::string&  groupName       )  { m_groupName        = groupName       ;  return true; }
   bool                    SetHeaderStructName         ( const std::string&  headerStructName)  { m_headerStructName = headerStructName;  return true; }

@@ -89,6 +89,7 @@ public:
   bool                          CheckEnumeratedValues   ();
   bool                          AddToMap                (SvdEnum *enu, std::map<std::string, SvdEnum*> &map);
   bool                          CheckFields             (SvdItem* fields, uint32_t regWidth, const std::string& name);
+  bool                          HasWriteConstraint      () { return m_svdWriteConstraint != nullptr; }
 
 protected:
 

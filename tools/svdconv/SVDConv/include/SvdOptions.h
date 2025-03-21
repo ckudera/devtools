@@ -56,6 +56,8 @@ public:
   void SetCreateFolder          (bool bCreateFolder             = true)   { m_bCreateFolder           = bCreateFolder           ; }
   void SetShowMissingEnums      (bool bShowMissingEnums         = true)   { m_bShowMissingEnums       = bShowMissingEnums       ; }
   void SetUnderTest             (bool bUnderTest                = true)   { m_bUnderTest              = bUnderTest              ; }
+  void SetDebugOutputModeText   (bool bDebugOutputModeText      = true)   { m_bDebugOutputModeText    = bDebugOutputModeText    ; }
+  void SetDebugOutputModeJson   (bool bDebugOutputModeJson      = true)   { m_bDebugOutputModeJson    = bDebugOutputModeJson    ; }
   void SetNoCleanup             (bool bNoCleanup                = true)   { m_bNoCleanup              = bNoCleanup              ; }
   void SetDebugStruct           (bool bDebugStruct              = true)   { m_bDebugStruct            = bDebugStruct            ; }
   void SetDebugHeaderfile       (bool bDebugHeaderfile          = true)   { m_bDebugHeaderfile        = bDebugHeaderfile        ; }
@@ -77,6 +79,8 @@ public:
   bool IsCreateFolder           () const  { return m_bCreateFolder           ; }
   bool IsShowMissingEnums       () const  { return m_bShowMissingEnums       ; }
   bool IsUnderTest              () const  { return m_bUnderTest              ; }
+  bool IsDebugOutputModeText    () const  { return m_bDebugOutputModeText    ; }
+  bool IsDebugOutputModeJson    () const  { return m_bDebugOutputModeJson    ; }
   bool IsNoCleanup              () const  { return m_bNoCleanup              ; }
   bool IsDebugStruct            () const  { return m_bDebugStruct            ; }
   bool IsDebugHeaderfile        () const  { return m_bDebugHeaderfile        ; }
@@ -104,6 +108,8 @@ private:
   bool m_bCreateFolder = false;
   bool m_bShowMissingEnums = false;
   bool m_bUnderTest = false;
+  bool m_bDebugOutputModeText = false;
+  bool m_bDebugOutputModeJson = false;
   bool m_bNoCleanup = false;
   bool m_bDebugStruct = false;
   bool m_bDebugHeaderfile = false;

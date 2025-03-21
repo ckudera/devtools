@@ -28,7 +28,7 @@ list(TRANSFORM LIB_HEADER_FILES PREPEND include/)
 # Create the 'library' containing all of the pack check code except main()
 add_library(svdconvlib OBJECT ${LIB_SOURCE_FILES} ${LIB_HEADER_FILES})
 target_include_directories(svdconvlib
-  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/
+  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/ ${CMAKE_SOURCE_DIR}/external/json/include
   PRIVATE ${PROJECT_BINARY_DIR}/
 )
 
@@ -55,7 +55,8 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
   target_link_options(svdconv PUBLIC "-static")
 endif()
 
-target_link_libraries(svdconv PUBLIC svdconvlib)
+target_link_libraries(svdconv PUBLIC svdconvlib nlohmann_json::nlohmann_json)
+target_include_directories(svdconv PUBLIC ${CMAKE_SOURCE_DIR}/external/json/include)
 
 add_custom_target(svdconvdist COMMAND
     ${CMAKE_COMMAND} -E tar "cvf${CMAKE_TAR_FLAGS}"
