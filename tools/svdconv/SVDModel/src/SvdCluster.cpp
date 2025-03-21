@@ -21,8 +21,8 @@ SvdCluster::SvdCluster(SvdItem* parent):
   m_enumContainer(0),
   m_calcSize(0),
   m_offset(0),
-  m_resetValue(0),
-  m_resetMask(0),
+  m_resetValue(std::nullopt),
+  m_resetMask(std::nullopt),
   m_access(SvdTypes::Access::UNDEF),
   m_modifiedWriteValues(SvdTypes::ModifiedWriteValue::UNDEF),
   m_readAction(SvdTypes::ReadAction::UNDEF)

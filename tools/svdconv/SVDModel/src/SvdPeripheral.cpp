@@ -85,8 +85,8 @@ SvdPeripheral::SvdPeripheral(SvdItem* parent):
   m_disableCondition(nullptr),
   m_hasAnnonUnions(false),
   m_calcSize(0),
-  m_resetValue(0),
-  m_resetMask(0),
+  m_resetValue(std::nullopt),
+  m_resetMask(std::nullopt),
   m_access(SvdTypes::Access::UNDEF)
 {
   SetSvdLevel(L_Peripheral);

@@ -28,8 +28,8 @@ SvdDevice::SvdDevice(SvdItem* parent):
   m_hasAnnonUnions(false),
   m_addressUnitBits(0),
   m_width(0),
-  m_resetValue(0),
-  m_resetMask(0),
+  m_resetValue(std::nullopt),
+  m_resetMask(std::nullopt),
   m_access(SvdTypes::Access::UNDEF)
 {
   SetSvdLevel(L_Device);
